@@ -1,0 +1,12 @@
+
+cp /group/kline-lab/EGA_redo/EGAR00001588042_2228.a.1kDLBCL.DLBCL.SL86353.exome_1tier.hg19.final.bam /scratch/mleukam/dave_subset/2228.final.bam
+
+cp /group/kline-lab/EGA_redo/EGAR00001588075_2263.a.1kDLBCL.DLBCL.SL90240.exome_1tier.hg19.final.bam /scratch/mleukam/dave_subset/2263.final.bam
+
+cp /group/kline-lab/EGA_redo/EGAR00001588212_2642.a.1kDLBCL.DLBCL.SL85345.exome_1tier.hg19.final.bam /scratch/mleukam/dave_subset/2642.final.bam
+
+cp /group/kline-lab/EGA_redo/EGAR00001588234_2671.a.1kDLBCL.DLBCL.SL86362.exome_1tier.hg19.final.bam /scratch/mleukam/dave_subset/2671.final.bam
+
+cp /group/kline-lab/EGA_redo/EGAR00001588349_2889.a.1kDLBCL.DLBCL.SL84216.exome_1tier.hg19.final.bam /scratch/mleukam/dave_subset/2889.final.bam
+
+
