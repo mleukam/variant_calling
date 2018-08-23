@@ -1,5 +1,5 @@
 ## Script to convert previously aligned BAM files to unaligned (uBAM) format
-## Original BAM files lack EOS tag, need to reformat in modern BAM format
+## Original BAM files lack EOF tag, need to reformat in modern BAM format
 ## Will convert to human-readable SAM and then back to BAM with modern samtools
 ## Built specifically for WES data from 1kDLBCL project
 ## Designed for batch submission to Gardner HPC at UChicago
@@ -35,12 +35,12 @@ FBLIST=($(ls *.final.bam))
 ## Pull the sample name from the input file names and make new array
 SMLIST=(${FBLIST[*]%.final.bam})
 
-## loop to run FastqToSam on each fq file in directory
-## returns unaligned BAM to the same directory
-## -Xmx2G asks for 2GB RAM, could ask for more like 8GB by changing number
+## Loop to first convert BAM to SAM with samtools
+## Next convert SAM back to BAM (with EOF tag)
+## Then convert to unaligned BAM and strip off problematic header info for downstream analysis
 for SAMPLE in ${SMLIST[*]}; 
 do
-    samtools view -h ${SAMPLE}.final.bam > ${file/.bam/.sam};
+    samtools view -h -o ${SAMPLE}.final.sam ${SAMPLE}.final.bam;
     samtools view -S -b ${SAMPLE}.final.sam > ${SAMPLE}.start.bam;
     java -Xmx8G -jar ${PICARD} RevertSam \
     I=${SAMPLE}.start.bam \

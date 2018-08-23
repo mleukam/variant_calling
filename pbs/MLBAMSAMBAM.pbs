@@ -15,7 +15,7 @@
 #PBS -o /home/mleukam/logs/bamsambam.output.log
 
 ## Specify the standard error (rather than printing to screen)
-#PBS -e /home/mleukam/logs/bamubam.error.log
+#PBS -e /home/mleukam/logs/bamsambam.error.log
 
 # navigate to shell dir
 cd /home/mleukam/shell
