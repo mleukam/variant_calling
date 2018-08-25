@@ -4,24 +4,24 @@
 #PBS -S /bin/bash
 
 ## Name the job
-#PBS -N sam_ubam
+#PBS -N move_sam
 
 ## Request resources
-#PBS -l walltime=12:00:00
+#PBS -l walltime=20:00:00
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=16gb
 
 ## Specify the standard output file (rather than printing to screen)
-#PBS -o /home/mleukam/logs/mlmakesam.output.log
+#PBS -o /home/mleukam/logs/movesam.output.log
 
 ## Specify the standard error (rather than printing to screen)
-#PBS -e /home/mleukam/logs/mlmakesam.error.log
+#PBS -e /home/mleukam/logs/movesam.error.log
 
 # navigate to shell dir
 cd /home/mleukam/shell
 
 # call shell scrpt
-./makesam.sh
+./movesam.sh
 
 # exit code
 exit 0
