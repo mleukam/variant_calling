@@ -35,20 +35,20 @@ echo "*** bam files converted to sam"
 ## Define the input variables as an array
 ## To get only one copy of the sample name, I will pick only files ending in "1",
 ## ignore the paired "2" file for this list
-FSLIST=($(ls *.final.sam))
+fslist=($(ls *.final.sam))
 
 ## Pull the sample name from the input file names and make new array
-SMLIST=(${FBLIST[*]%.final.sam})
+smlist=(${fslist[*]%.final.sam})
 
 ## Loop to convert SAM back to BAM (with EOF tag)
 ## Then convert to unaligned BAM and strip off problematic header info for downstream analysis
 echo "*** starting conversion of sam to ubam"
-for SAMPLE in ${SMLIST[*]}; 
+for sample in ${smlist[*]}; 
 do
-	samtools view -S -b ${SAMPLE}.final.sam > ${SAMPLE}.start.bam
+	samtools view -S -b ${sample}.final.sam > ${sample}.start.bam
 	java -Xmx16G -jar ${PICARD} RevertSam \
-    I=${SAMPLE}.start.bam \
-    O=${SAMPLE}_revertsam.bam \
+    I=${sample}.start.bam \
+    O=${sample}_revertsam.bam \
     SANITIZE=true \
     MAX_DISCARD_FRACTION=0.3 \
     ATTRIBUTE_TO_CLEAR=XT \
