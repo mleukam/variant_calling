@@ -12,7 +12,7 @@ set -euo pipefail
 ## Set IFS to split only on newline and tab
 IFS=$'\n\t'
 
-echo "*** run by `whoami` on `date`" > /home/mleukam/runlog.makesam.txt
+echo "*** run by `whoami` on `date`"
 
 ## Load compiler
 module load gcc/6.2.0
@@ -28,8 +28,8 @@ cd /scratch/mleukam/wes_data
 ## For loop for converstion of bam --> sam
 echo "*** starting conversion of bam to sam"
 file=EGAR00001587909_790.a.1kDLBCL_FFPEvsFrozen.DLBCL.SL105409.exome_1tier.hg19.final.bam
-echo $file; 
-samtools view -h $file > ${file/.bam/.sam}; 
+echo $file
+samtools view -h $file > ${file/.bam/.sam}
 echo "*** bam files converted to sam"
 
 ## Define the input variables as an array
