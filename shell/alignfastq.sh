@@ -26,12 +26,12 @@ module load gcc/6.2.0
 module load fastqc/0.11.5
 #
 # navigate to directory containing fastq files
-cd /scratch/mleukam/mouse
+cd /scratch/mleukam/james_wes
 #
 # run fastqc on input sample
 ## note: fastqc won't create the output directory; has to be done beforehand
 ## creates zip file and html file in the output directory
-fastqc -o /scratch/mleukam/mouse/fastqc A20.fq
+fastqc -o /scratch/mleukam/james_wes/${1}.fq
 
 #### CONVERT FASTQ TO UBAM ####
 #
@@ -47,15 +47,14 @@ module load picard/2.8.1
 # -Xmx2G asks for 8GB RAM
 # include necessary read information
 java -Xmx16G -jar ${PICARD} FastqToSam \
-FASTQ=A20.fq \
-O=A20_unaligned.bam \
-READ_GROUP_NAME=HW5FWBBXX.6 \
-SAMPLE_NAME=A20 \
-LIBRARY_NAME=coreWGS \
-PLATFORM_UNIT=K00242 \
+FASTQ=${1}.fq \
+O=${1}_unaligned.bam \
+READ_GROUP_NAME=CCEMTANXX.2 \
+SAMPLE_NAME=${1} \
+LIBRARY_NAME=agilent_human_whole_exome_v5 \
+PLATFORM_UNIT=D00235 \
 PLATFORM=illumina \
-SEQUENCING_CENTER=UCHICAGOCORE \
-RUN_DATE=2018-09-30T00:00:00-0400 \
+SEQUENCING_CENTER=Theragen
 #
 #### MARK ILLUMINA ADAPTERS ####
 #
@@ -63,9 +62,9 @@ RUN_DATE=2018-09-30T00:00:00-0400 \
 # sample list created above
 # run MarkIlluminaAdapters on uBAM created from provided sample
 java -Xmx16G -jar ${PICARD} MarkIlluminaAdapters \
-I=A20_unaligned.bam \
-O=A20_markilluminaadapters.bam \
-M=A20_markilluminaadapters_metrics.txt \
+I=${1}_unaligned.bam \
+O=${1}_markilluminaadapters.bam \
+M=${1}_markilluminaadapters_metrics.txt \
 TMP_DIR=/scratch/mleukam/temp/
 #
 #### ALIGN SEQUENCES ####
@@ -74,12 +73,7 @@ TMP_DIR=/scratch/mleukam/temp/
 module load bwa/0.7.17
 module load samtools/1.6.0
 # 
-# generate index files from reference
-bwa index -a bwtsw GRCm38p6_ref.fa 
-samtools faidx GRCm38p6_ref.fa
-java -jar ${PICARD} CreateSequenceDictionary \
-    REFERENCE=GRCm38p6_ref.fa \
-    OUTPUT=GRCm38p6_ref.dict
+
 #
 # loop to run pipeline on all of the called files in the directory
 # note that t flag in bwa is set to 28 for number of cores in each Gardner node
