@@ -23,21 +23,22 @@ module load picard/2.8.1
 ## Navigate to directory containing fastq files
 cd /scratch/mleukam/dave_subset
 
-## Define the input variables as an array
-## To get only one copy of the sample name, I will pick only files ending in "1",
-## ignore the paired "2" file for this list
-FBLIST=($(ls *.final.bam))
+#############
+# MAKE UBAM #
+#############
 
-## Pull the sample name from the input file names and make new array
-SMLIST=(${FBLIST[*]%.final.bam})
+# define the input variables as an array
+BAMLIST=($(ls *.bam))
 
-## loop to run FastqToSam on each fq file in directory
-## returns unaligned BAM to the same directory
-## -Xmx2G asks for 2GB RAM, could ask for more like 8GB by changing number
+# pull the sample name from the input file names and make new array
+SMLIST=(${BAMLIST[*]%.bam})
+
+# revert aligned BAM to unaligned BAM and add readgroup information
+# returns unaligned BAM to the same directory
 for SAMPLE in ${SMLIST[*]}; 
 do
-	java -Xmx8G -jar ${PICARD} RevertSam \
-    I=${SAMPLE}.final.bam \
+	java -Xmx32G -jar ${PICARD} RevertSam \
+    I=${SAMPLE}.bam \
     O=${SAMPLE}_revertsam.bam \
     SANITIZE=true \
     MAX_DISCARD_FRACTION=0.005 \
