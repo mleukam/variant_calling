@@ -53,3 +53,4 @@ do
     REMOVE_ALIGNMENT_INFORMATION=true
     TMP_DIR=/scratch/mleukam/temp;
 done
+
