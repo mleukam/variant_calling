@@ -1,0 +1,25 @@
+#!/usr/bin/env nextflow
+/*
+========================================================================================
+              W H O L E  E X O M E  T U M O R - O N L Y  D N A - S E Q
+========================================================================================
+ #### Homepage / Documentation
+ https://github.com/***
+
+ #### Authors
+Mike Leukam @leuk0cyte1 <mleukam@medicine.bsd.uchicago.edu>
+----------------------------------------------------------------------------------------
+Developed based on GATK's best practise, takes set of FASTQ files and performs:
+ - alignment (BWA)
+ - recalibration (GATK)
+ - realignment (GATK)
+ - variant calling (GATK)
+ - variant evaluation (SnpEff)
+*/
+
+process bamtofastq{
+	tag ${name}
+
+
+
+}

@@ -65,7 +65,7 @@ do
     I=${SAMPLE}.exome.bam \
     O=${SAMPLE}_revertsam.bam \
     SANITIZE=true \
-    MAX_DISCARD_FRACTION=0.005 \
+    MAX_DISCARD_FRACTION=0.05 \
     ATTRIBUTE_TO_CLEAR=XT \
     ATTRIBUTE_TO_CLEAR=XN \
     ATTRIBUTE_TO_CLEAR=AS \
